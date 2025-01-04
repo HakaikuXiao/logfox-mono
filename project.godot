@@ -11,9 +11,22 @@ config_version=5
 [application]
 
 config/name="logfox-mono"
-config/features=PackedStringArray("4.3", "Forward Plus")
+run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+LogFoxAutoload="*res://addons/LogFoxMono/Autoload.cs"
 
 [dotnet]
 
 project/assembly_name="logfox-mono"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/LogFoxMono/plugin.cfg")
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
