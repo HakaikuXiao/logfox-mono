@@ -92,11 +92,18 @@ public partial class LogFox : Node
 			string memberName, int lineNumber
 			)
 	{
-		GD.PrintRich("[", Time.GetTimeStringFromSystem(), "] ",
-		 	"(N: ", GetSourceName(), " F: ", memberName, " L: ", lineNumber, ") ",
-		  	"[", logLevel, "[/color]] ",
+		string msg = (
+			"[" + Time.GetTimeStringFromSystem() + "] " +
+		 	"(N: " + GetSourceName() + " F: " + memberName + " L: " + lineNumber + ") " +
+		  	"[" + logLevel + "[/color]] " +
 		  	message
-		  	);
+		);
+		GD.PrintRich(msg);
+		if (!OS.IsDebugBuild()) { return; }
+		if (Engine.GetMainLoop() is SceneTree sceneTree)
+		{
+			sceneTree.Root.GetNode<Autoload>("LogFoxAutoload").EmitSignal("NewLog", msg);
+		}
 	}
 
 
@@ -111,7 +118,7 @@ public partial class LogFox : Node
 		{
 			throw new System.InvalidOperationException("Cannot get source name.");
 		}
-		return frames[2].GetMethod().ReflectedType.Name;
+		return frames[3].GetMethod().ReflectedType.Name;
 	}
 
 

@@ -2,6 +2,9 @@ using Godot;
 
 public partial class Autoload : Node
 {
+	[Signal]
+	public delegate void NewLogEventHandler(string msg);
+
 	public override void _Ready()
 	{
 		bool isFileLoggingEnabled = (bool)ProjectSettings.GetSetting("debug/file_logging/enable_file_logging");
@@ -13,6 +16,9 @@ public partial class Autoload : Node
 			LogFox.Warning("Please enable this manually in project settings to work properly.");
 		}
 		LogFox.LogSystemInfo();
-		QueueFree();
+		LogFox.Info("_Ready");
+		if (!OS.IsDebugBuild()) { return; }
+		LogFox.Info("It is debug build. Loading LogFox ingame viewer.");
+		AddChild(new InGameLogView());
 	}
 }
