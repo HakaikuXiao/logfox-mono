@@ -8,6 +8,10 @@ public partial class Plugin : EditorPlugin
 	{
 		AddAutoloadSingleton("LogFoxAutoload", "res://addons/LogFoxMono/Autoload.cs");
 	}
+	public override void _ExitTree()
+	{
+		RemoveAutoloadSingleton("LogFoxAutoload");
+	}
 }
 
 #endif

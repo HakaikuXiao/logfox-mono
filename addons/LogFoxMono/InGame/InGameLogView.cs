@@ -25,4 +25,9 @@ public partial class InGameLogView : RichTextLabel
 	{
 		AppendText(msg + "\n");
 	}
-}
+	public override void _ExitTree()
+	{
+		GetTree().Root.GetNode<Autoload>("LogFoxAutoload").Disconnect("NewLog", new Callable(this, "AddLog"));
+		LogFox.Info("_ExitTree");
+	}
+}	

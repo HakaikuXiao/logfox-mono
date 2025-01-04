@@ -146,7 +146,7 @@ public partial class LogFox : Node
 						 $"OS: {OS.GetName()} {OS.GetModelName()}\n" +
 						 $"CPU: {OS.GetProcessorName()}\n" +
 						 $"RAM: {System.GC.GetGCMemoryInfo().TotalAvailableMemoryBytes / 1024 / 1024 / 1024} GB available\n";
-		Log(message, "[color=#94E2D5]SYSTEM INFO[/color]", "LogSystemInfo", lineNumber);
+		Log(message, "[color=#94E2D5]SYSTEM INFO", "LogSystemInfo", lineNumber);
 	}
 }
 
